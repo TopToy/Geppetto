@@ -27,6 +27,9 @@ OBBC_PORT = 30010
 COMM_PORT = 30020
 AB_PORT = 12000
 
+# # HTTP deployment settings #
+# CORE_IP = "127.0.0.1"
+
 # Docker settings
 NETWORK_CIDR = "172.18.0.0/16"
 NETWORK_GATEWAY = "172.18.0.1"

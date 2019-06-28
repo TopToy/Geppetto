@@ -225,6 +225,7 @@ def generate_core_ssl():
     os.makedirs(os.path.join(ENV_DIR, 'config','sslConfig'), exist_ok=True)
     copy_tree('files/core_files/ssl', os.path.join(ENV_DIR, 'config', 'sslConfig'))
 
+
 def config_core():
     generate_core_toml()
     generate_core_hosts()
@@ -232,3 +233,14 @@ def config_core():
     generate_core_keys()
     generate_core_log4j()
     generate_core_ssl()
+
+
+# def generate_http_config():
+#     settings = open(os.path.join(HTTP_PATH, 'src', 'settings.py'), "w+")
+#     settings.write(
+# 'TOPTOY_IP = "127.0.0.1"\n\
+# TOPTOY_RPCS_PORT = 9876\n\
+# \n\
+# SPINNER_IP = "127.0.0.1"\n\
+# SPINNER_PORT = 8000\n'
+#     )
