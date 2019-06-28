@@ -22,3 +22,7 @@ def clone_and_update_repo(repo_ptah, repo_url):
 def compile_core(project_directory):
     print('<<<<< building {} >>>>>'.format(project_directory))
     subprocess.call(['make', '-C', project_directory, 'build'])
+
+
+def create_ip(cidr,last_block):
+    return (cidr.split('/')[0] + 'r').replace(cidr.split('/')[0].split('.')[-1] + 'r', str(last_block))
