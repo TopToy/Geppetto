@@ -1,13 +1,17 @@
 import os
 
 from settings import *
-from utils.utils import create_ip
+
 from shutil import copy2
 from distutils.dir_util import copy_tree
 
+from utils.utils import create_ip
+
+
 def generate_core_toml():
-    os.makedirs(os.path.join(ENV_DIR,'config'), exist_ok=True)
-    toml = open(os.path.join(ENV_DIR, 'config', 'config.toml'), "w+")
+    print(">>> Generate config.toml")
+    os.makedirs(os.path.join(CORE_ENV_DIR), exist_ok=True)
+    toml = open(os.path.join(CORE_ENV_DIR, 'config.toml'), "w+")
     toml.write(
 'title = "configuration"\n\
 [system]\n\
@@ -39,14 +43,15 @@ def generate_core_toml():
         obbcPort = {}\n\
         publicKey ="""MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEnhUKrcjsCXCbWHHqH1tk3jYO6yQZVi9vBmZ/rZ\n\
                    N9n8/eSalUt/oheiXaDNXJZERS5Ysl0sRJ0tYjuMM0ShkMJg=="""\n'
-            .format(i, i, create_ip(NETWORK_CIDR, i + 3), WRB_PORT, COMM_PORT, OBBC_PORT)
+            .format(i, i, create_ip(NETWORK_SUBNET, i + 3), WRB_PORT, COMM_PORT, OBBC_PORT)
     )
     toml.close()
 
 
 def generate_core_hosts():
-    os.makedirs(os.path.join(ENV_DIR, 'config', 'ABConfig'), exist_ok=True)
-    hosts = open(os.path.join(ENV_DIR, 'config', 'ABConfig', 'hosts.config'), "w+")
+    print(">>> Generate hosts.config")
+    os.makedirs(os.path.join(CORE_ENV_DIR, 'ABConfig'), exist_ok=True)
+    hosts = open(os.path.join(CORE_ENV_DIR, 'ABConfig', 'hosts.config'), "w+")
     hosts.write(
 '# Copyright (c) 2007-2013 Alysson Bessani, Eduardo Alchieri, Paulo Sousa, and the authors indicated in the @author tags\n\
 #\n\
@@ -77,14 +82,15 @@ def generate_core_hosts():
 #server id, address and port (the ids from 0 to n-1 are the service replicas)\n'
     )
     for i in range(CLUSTER_SIZE):
-        hosts.write('{} {} {}\n'.format( i, create_ip(NETWORK_CIDR, i + 3), AB_PORT))
+        hosts.write('{} {} {}\n'.format( i, create_ip(NETWORK_SUBNET, i + 3), AB_PORT))
 
     hosts.close()
 
 
 def generate_core_system():
-    os.makedirs(os.path.join(ENV_DIR, 'config', 'ABConfig'), exist_ok=True)
-    sys = open(os.path.join(ENV_DIR, 'config', 'ABConfig', 'system.config'), "w+")
+    print(">>> Generate system.config")
+    os.makedirs(os.path.join(CORE_ENV_DIR, 'ABConfig'), exist_ok=True)
+    sys = open(os.path.join(CORE_ENV_DIR, 'ABConfig', 'system.config'), "w+")
     sys.write(
 '# Copyright (c) 2007-2013 Alysson Bessani, Eduardo Alchieri, Paulo Sousa, and the authors indicated in the @author tags\n\
 #\n\
@@ -209,30 +215,43 @@ system.bft = true\n\
 
 
 def generate_core_keys():
-    os.makedirs(os.path.join(ENV_DIR, 'config', 'ABConfig', 'keys'), exist_ok=True)
+    print(">>> Generate core keys")
+    os.makedirs(os.path.join(CORE_ENV_DIR, 'ABConfig', 'keys'), exist_ok=True)
     for i in range(CLUSTER_SIZE):
         copy2('files/core_files/keys/privatekey',
-              os.path.join(ENV_DIR, 'config', 'ABConfig', 'keys', 'privatekey' + str(i)))
+              os.path.join(CORE_ENV_DIR, 'ABConfig', 'keys', 'privatekey' + str(i)))
         copy2('files/core_files/keys/publickey',
-              os.path.join(ENV_DIR, 'config', 'ABConfig', 'keys', 'publickey' + str(i)))
+              os.path.join(CORE_ENV_DIR, 'ABConfig', 'keys', 'publickey' + str(i)))
 
 
 def generate_core_log4j():
-    copy2('files/core_files/log4j.properties', os.path.join(ENV_DIR,'config'))
+    print(">>> Generate core log4j.properties")
+    copy2('files/core_files/log4j.properties', CORE_ENV_DIR)
 
 
 def generate_core_ssl():
-    os.makedirs(os.path.join(ENV_DIR, 'config','sslConfig'), exist_ok=True)
-    copy_tree('files/core_files/ssl', os.path.join(ENV_DIR, 'config', 'sslConfig'))
+    print(">>> Generate core ssl")
+    os.makedirs(os.path.join(CORE_ENV_DIR, 'sslConfig'), exist_ok=True)
+    copy_tree('files/core_files/ssl', os.path.join(CORE_ENV_DIR, 'sslConfig'))
+
+
+def config_core_inst():
+    print(">>> Generate core instruction")
+    os.makedirs(os.path.join(CORE_ENV_DIR, 'inst'), exist_ok=True)
+    f = open(os.path.join(CORE_ENV_DIR, 'inst', 'input.inst'), "w+")
+    f.write('up\n')
+    f.close()
 
 
 def config_core():
+    print(">>> Generate core configuration")
     generate_core_toml()
     generate_core_hosts()
     generate_core_system()
     generate_core_keys()
     generate_core_log4j()
     generate_core_ssl()
+    config_core_inst()
 
 
 # def generate_http_config():

@@ -13,6 +13,7 @@ CORE_ENV_DIR = os.path.join(ENV_DIR, CORE_SERVER)
 HTTP_ENV_DIR = os.path.join(ENV_DIR, HTTP_SERVER)
 CORE_PATH = os.path.join(WORKING_DIR, CORE_SERVER)
 HTTP_PATH = os.path.join(WORKING_DIR, HTTP_SERVER)
+OUT_DIR = os.path.join(WORKING_DIR, 'out')
 
 # Core deployment settings #
 CLUSTER_SIZE = 4
@@ -27,9 +28,12 @@ OBBC_PORT = 30010
 COMM_PORT = 30020
 AB_PORT = 12000
 
-# # HTTP deployment settings #
-# CORE_IP = "127.0.0.1"
-
 # Docker settings
-NETWORK_CIDR = "172.18.0.0/16"
+NETWORK_SUBNET = "172.18.0.0/16"
 NETWORK_GATEWAY = "172.18.0.1"
+NETWORK_NAME = "toy_net"
+CORE_IMAGE = "toy:0.1"
+HTTP_IMAGE = "spinner:0.1"
+CORE_DOCKER_RPC_PORT = 9876
+HTTP_PORT = 8000
+HOST_BOUNDED_PORT = 8000
