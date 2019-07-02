@@ -107,8 +107,8 @@ def run():
     Negotiation with the cluster is done by RESTful API as indicated in https://github.com/TopToy/Spinner.git.
     Note that the i_th frontend server is bounded to ports 8000 + i (you may configure this in settings.py)
     """
-    run_cluster([os.path.join(ENV_DIR, 'composed', 'http_compose.yml'),
-                 os.path.join(ENV_DIR, 'composed', 'core_compose.yml')])
+    run_cluster([os.path.join(ENV_DIR, 'composed', 'core_compose.yml'),
+                 os.path.join(ENV_DIR, 'composed', 'http_compose.yml')])
 
 
 @main.command()
