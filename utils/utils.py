@@ -4,10 +4,8 @@ import subprocess
 from settings import CORE_GIT_URL, HTTP_GIT_URL, CORE_PATH, HTTP_PATH
 from git import Repo
 
-from utils.dockerUtiles import build_docker_images
 
-
-def install():
+def install_tools():
     clone_and_update_repo(CORE_PATH, CORE_GIT_URL)
     clone_and_update_repo(HTTP_PATH, HTTP_GIT_URL)
     compile_core(CORE_PATH)

@@ -52,26 +52,27 @@ def compose_core():
         compose_core_server(i, f)
     compose_footer(f)
     f.close()
+    return os.path.join(ENV_DIR, 'composed', 'core_compose.yml')
 
 
 def compose_core_server(id, f):
-
     from utils.utils import create_ip
     f.write(
-'\t                                                                                                                                                 {}{}:\n\
-    image: {}\n\
-    container_name: {}_{}\n\
-    environment:\n\
-    - ID={}\n\
-    - Type=r\n\
-    volumes:\n\
-    - {}:/tmp/JToy\n\
-    - {}:/JToy/bin/src/main/resources\n\
-    networks:\n\
-        {}:\n\
-            ipv4_address: {}\n'.format(CORE_SERVER, id, CORE_IMAGE,CORE_SERVER,
+'\
+    {}{}:\n\
+        image: {}\n\
+        container_name: {}_{}\n\
+        environment:\n\
+        - ID={}\n\
+        - Type=r\n\
+        volumes:\n\
+        - {}:/tmp/JToy\n\
+        - {}:/JToy/bin/src/main/resources\n\
+        networks:\n\
+            {}:\n\
+                ipv4_address: {}\n'.format(CORE_SERVER, id, CORE_IMAGE, CORE_SERVER,
                                        id, id, os.path.join(OUT_DIR, CORE_SERVER),
-                                         CORE_ENV_DIR, NETWORK_NAME, create_ip(NETWORK_SUBNET, id + 3))
+                                        CORE_ENV_DIR, NETWORK_NAME, create_ip(NETWORK_SUBNET, id + 3))
     )
 
 
@@ -86,22 +87,23 @@ def compose_footer(f):
 def compose_http_server(id, f):
     from utils.utils import create_ip
     f.write(
-'\t{}{}:\n\
-    image: {}\n\
-    container_name: {}_{}\n\
-    environment:\n\
-    - ID={}\n\
-    - IP={}\n\
-    - PORT={}\n\
-    - CORE_IP={}\n\
-    - CORE_PORT={}\n\
-    volumes:\n\
-    - {}:/tmp/Spinner\n\
-    ports:\n\
-    - {}:{}\n\
-    networks:\n\
-        {}:\n\
-            ipv4_address: {}\n'.format(HTTP_SERVER, id, HTTP_IMAGE, HTTP_SERVER, id, id,
+'\
+    {}{}:\n\
+        image: {}\n\
+        container_name: {}_{}\n\
+        environment:\n\
+        - ID={}\n\
+        - IP={}\n\
+        - PORT={}\n\
+        - CORE_IP="{}"\n\
+        - CORE_PORT={}\n\
+        volumes:\n\
+        - {}:/tmp/Spinner\n\
+        ports:\n\
+        - "{}:{}"\n\
+        networks:\n\
+            {}:\n\
+                ipv4_address: {}\n'.format(HTTP_SERVER, id, HTTP_IMAGE, HTTP_SERVER, id, id,
                                        create_ip(NETWORK_SUBNET, id + CLUSTER_SIZE + 3),
                                        HTTP_PORT, create_ip(NETWORK_SUBNET, id + 3), CORE_DOCKER_RPC_PORT
                                         , os.path.join(OUT_DIR, HTTP_SERVER), HOST_BOUNDED_PORT + id, HTTP_PORT
@@ -118,4 +120,12 @@ def compose_http():
         compose_http_server(i, f)
     compose_footer(f)
     f.close()
+    return os.path.join(ENV_DIR, 'composed', 'http_compose.yml')
+
+
+def compose_tools():
+    return compose_core(), compose_http()
+
+
+
 

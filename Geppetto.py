@@ -1,16 +1,13 @@
-from settings import CORE_PATH
-from utils.configuration import config_core
-from utils.dockerUtiles import make_docker_image, build_docker_images, build_network, compose_core, compose_http
-from utils.utils import startup
+import subprocess
+from sys import stdout
 
-
-def main():
-    # startup()
-    config_core()
-    # build_docker_images()
-    # build_network()
-    compose_core()
-    compose_http()
+import cli
 
 if __name__ == '__main__':
-    main()
+    cli.main()
+    # while True:
+    #     cmd = input('gep-cli> ')
+    #     if cmd == 'exit':
+    #         print('Goodbye')
+    #         break
+    #     subprocess.call(['python', 'cli.py', cmd], stdout=stdout)

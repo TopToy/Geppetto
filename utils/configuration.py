@@ -254,12 +254,5 @@ def config_core():
     config_core_inst()
 
 
-# def generate_http_config():
-#     settings = open(os.path.join(HTTP_PATH, 'src', 'settings.py'), "w+")
-#     settings.write(
-# 'TOPTOY_IP = "127.0.0.1"\n\
-# TOPTOY_RPCS_PORT = 9876\n\
-# \n\
-# SPINNER_IP = "127.0.0.1"\n\
-# SPINNER_PORT = 8000\n'
-#     )
+def config_tools():
+    config_core()

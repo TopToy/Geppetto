@@ -16,8 +16,8 @@ HTTP_PATH = os.path.join(WORKING_DIR, HTTP_SERVER)
 OUT_DIR = os.path.join(WORKING_DIR, 'out')
 
 # Core deployment settings #
-CLUSTER_SIZE = 4
-POSSIBLE_FAILURES = 1
+CLUSTER_SIZE = 1
+POSSIBLE_FAILURES = 0
 WORKERS = 1
 BLOCK_SIZE = 1000
 INIT_TMO = 100
@@ -37,3 +37,12 @@ HTTP_IMAGE = "spinner:0.1"
 CORE_DOCKER_RPC_PORT = 9876
 HTTP_PORT = 8000
 HOST_BOUNDED_PORT = 8000
+
+
+def setup_env():
+    os.makedirs(ENV_DIR, exist_ok=True)
+    os.makedirs(CORE_ENV_DIR, exist_ok=True)
+    os.makedirs(HTTP_ENV_DIR, exist_ok=True)
+    # os.makedirs(CORE_PATH, exist_ok=True)
+    # os.makedirs(HTTP_PATH, exist_ok=True)
+    os.makedirs(OUT_DIR, exist_ok=True)
