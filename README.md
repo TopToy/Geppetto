@@ -42,7 +42,7 @@ Geppetto has an http client interactive shell.
 
 To run the client shell type
 ```bash
-python Gepptto client
+python Gepptto.py client
 ```
 press `?` to see the possible commands.
 
