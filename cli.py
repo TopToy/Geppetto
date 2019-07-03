@@ -4,7 +4,7 @@ import time
 from sys import stdout
 
 import click
-
+from httpGepClient import clientCli
 from settings import *
 from utils.configuration import config_tools
 from utils.dockerUtiles import build_docker_images, build_network, compose_tools, docker_client
@@ -130,6 +130,11 @@ def clean():
     """
     cli_clean()
 
-# if __name__ == '__main__':
-#     main()
+
+@main.command()
+def client():
+    """
+    Run an interactive shell of http client for the TopToy cluster
+    """
+    clientCli.main_cli()
 

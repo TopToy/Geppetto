@@ -6,6 +6,7 @@ CORE_GIT_URL = 'https://github.com/TopToy/TopToy.git'
 HTTP_SERVER = 'Spinner'
 HTTP_GIT_URL = 'https://github.com/TopToy/Spinner.git'
 WORKING_DIR = '/tmp/Geppetto_wd'
+BASE_URL = 'http://[ip]:[port]/toptoy/'
 
 # Environment settings #
 ENV_DIR = os.path.join(WORKING_DIR, 'env')
