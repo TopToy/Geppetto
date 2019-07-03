@@ -139,7 +139,7 @@ class GepClient(Cmd):
 
     def do_get_tx_data(self, args):
         """
-        Returns a transaction by the supplied arguments
+        Returns a transaction data by the supplied arguments
         :params: 
             -ip: The ip of the frontend server (default is 127.0.0.1)
             -port: The frontend port (mandatory)
@@ -150,7 +150,7 @@ class GepClient(Cmd):
             -t: The transaction index (mandatory)
             -bl: Whether to block the call (default is 0 (false))
             Note that -c, -w, -p, -b and -t can be retrieved from the return value of write_tx action
-        :return: The transaction with the above arguments
+        :return: The transaction data with the above arguments
         """
         try:
             ip, port = get_ip_and_port(args)

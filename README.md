@@ -37,5 +37,14 @@ To get a full elaboration of Geppetto commands, type:
 python Geppetto.py --help
 ```
 
+## Geppetto Client
+Geppetto has an http client interactive shell.
+
+To run the client shell type
+```bash
+python Gepptto client
+```
+press `?` to see the possible commands.
+
 
 
