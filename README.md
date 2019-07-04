@@ -7,6 +7,10 @@ A deployer for a docker based TopToy network
     sudo apt-get update
     sudo apt-get install python3.7
     ```
+1. Install pip
+    ```bash
+    sudo apt-get install python-pip
+    ```
 1. Install dependencies
     ```bash
     pip install -r requirements.txt
