@@ -24,3 +24,10 @@ chmod +x /usr/local/bin/docker-compose
 
 #install dependecies
 pip3 install -r requirements.txt --user
+
+read -p 'We need to restart your system, restart nwo? [Y]: ' answer
+if [ "$answer" != "${answer#[Yy]}" ] ;then
+    reboot
+else
+    echo "Restart your system before running Geppetto"
+fi
