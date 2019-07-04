@@ -5,7 +5,7 @@ A deployer for a docker based TopToy network
 1. Install necessary tools (such as python3, java, docker and maven):
     ```bash
     cd path/to/Geppetto
-    ./install.sh
+    sudo ./install.sh
     ```
 ## Example
 The following deploys a basic TopToy network with a single core server and a single frontend server 
