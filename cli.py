@@ -34,6 +34,8 @@ def run_cluster(compose_files):
     print(">>> Running {} cluster, each frontend is connected to one {} server".format(HTTP_SERVER, CORE_SERVER))
     ret += [subprocess.call(['docker-compose', '-f',
                              os.path.join(ENV_DIR, 'composed', 'http_compose.yml'), 'up', '-d'], stdout=stdout)]
+    for i in range(CLUSTER_SIZE):
+        print("Spinner_{} is listening on port {}\n".format(i, HOST_BOUNDED_PORT))
     return ret
 
 
