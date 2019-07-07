@@ -25,7 +25,7 @@ chmod +x /usr/local/bin/docker-compose
 #install dependecies
 pip3 install -r requirements.txt --user
 
-read -p 'We need to restart your system, restart nwo? (y/n): ' answer
+read -p 'We need to restart your system, restart now? (y/n): ' answer
 if [ "$answer" != "${answer#[Yy]}" ] ;then
     reboot
 else
