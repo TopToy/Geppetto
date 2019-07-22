@@ -225,7 +225,7 @@ class GepClient(Cmd):
         """
         try:
             ip, port = get_ip_and_port(args)
-            d = get_arg_by_key(args.split(), '-d')
+            d = args[args.find('"') + 1 : args.rfind('"')]
             if d is None:
                 raise Exception("No data was provided")
             print("transaction ID = {}".format(str(gepClient.write_tx(port, ip, get_c(args), d))))
